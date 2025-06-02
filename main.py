@@ -256,8 +256,8 @@ if prompt := st.chat_input("Tu bas bol....filter off today!!!"):
                         st.markdown(f'<div class="user-message">{latest_content}</div>', unsafe_allow_html=True)
             except Exception as e:
                 st.error(f"An error occurred while generating response: {e}")
-                st.session_state.messages.append({"role": "assistant", "content": "Dosto, kuch toh gadbad ho gayi! Server pe kuch masla aa gaya hai. Thodi der mein try karna, ho jayega."})
+                st.session_state.messages.append({"role": "assistant", "content": ""Aree kuch toh gadbad hua hai 100% Shelly ne hi button daba diya hoga Server ka mood off kar diya usne 💀 Thoda ruk jao… thik ho jayega lol"})
                 with chatbox:
                     with st.chat_message("assistant", avatar=Image.open("assets/Amishakadukar.jpg")):
                         st.markdown(":grey[**Amisha Kadukar**]", unsafe_allow_html=True)
-                        st.write("Dosto, kuch toh gadbad ho gayi! Server pe kuch masla aa gaya hai. Thodi der mein try karna, ho jayega.")
+                        st.write(""Aree kuch toh gadbad hua hai 100% Shelly ne hi button daba diya hoga Server ka mood off kar diya usne 💀 Thoda ruk jao… thik ho jayega lol")
