@@ -1,2 +1,11 @@
+# Ignore environment variables file
 .env
-.venv
+
+# Ignore virtual environment folder
+.venv/
+
+# Ignore Python cache
+__pycache__/
+
+# Ignore chat history file
+chat_history.json
