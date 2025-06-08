@@ -9,4 +9,5 @@ dependencies = [
     "pillow>=11.2.1",
     "python-dotenv>=1.1.0",
     "streamlit>=1.45.1",
+    "supabase-py>=1.0.0"
 ]
