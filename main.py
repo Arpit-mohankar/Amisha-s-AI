@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from PIL import Image
 from google import genai
 from google.genai import types
+from supabase_client import save_message  # ✅ import your Supabase function
+
 
 #Load environment variables
 load_dotenv()
@@ -15,9 +17,9 @@ st.set_page_config(
     page_icon=Image.open("assets/page_icon.jpg"),
     layout="wide",
     initial_sidebar_state="expanded",
-     menu_items={
-        'Get Help': 'https://github.com/kaustuvc/persona-ai-chatbot',
-        'Report a bug': "https://github.com/kaustuvc/persona-ai-chatbot",
+    menu_items={
+        'Get Help': 'https://github.com/Arpit-mohankar',
+        'Report a bug': "https://github.com/Arpit-mohankar",
         'About': "This is an AI chatbot that talks with you in Amisha's persona"
     }
 )
@@ -55,7 +57,7 @@ No judgement, no overreaction... just vibes here """})
 
     # Otherwise show chat history
     for i, message in enumerate(st.session_state.messages):
-        if message["role"] == "author":
+        if message["role"] == "user":
             with st.chat_message("user"):
                 st.markdown(":grey[**User**]", unsafe_allow_html=True)
                 st.markdown(message["content"])
@@ -222,7 +224,9 @@ Use this tone and flow in every reply.
 """
 if prompt := st.chat_input("Tu bas bol....filter off today!!!"):
     # Add user message to chat history
-    st.session_state.messages.append({"role": "author", "content": prompt})
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    save_message("user", prompt)
+
 
     with chatbox:
         # Display user message in chat message container
@@ -247,6 +251,8 @@ if prompt := st.chat_input("Tu bas bol....filter off today!!!"):
                 )
                 #Add assistant response to chat history
                 st.session_state.messages.append({"role": "assistant", "content": response.text})
+                save_message("assistant", response.text)
+
     
                 if st.session_state.messages:
                     latest_message = st.session_state.messages[-1]
@@ -256,8 +262,9 @@ if prompt := st.chat_input("Tu bas bol....filter off today!!!"):
                         st.markdown(f'<div class="user-message">{latest_content}</div>', unsafe_allow_html=True)
             except Exception as e:
                 st.error(f"An error occurred while generating response: {e}")
-                st.session_state.messages.append({"role": "assistant", "content": "Dosto, kuch toh gadbad ho gayi! Server pe kuch masla aa gaya hai. Thodi der mein try karna, ho jayega."})
+                st.session_state.messages.append({"role": "assistant", "content": "Aree kuch toh gadbad hua hai  100% Shelly ne hi button daba diya hoga Server ka mood off kar diya usne 💀 Thoda ruk jao… thik ho jayega lol"})
                 with chatbox:
                     with st.chat_message("assistant", avatar=Image.open("assets/Amishakadukar.jpg")):
                         st.markdown(":grey[**Amisha Kadukar**]", unsafe_allow_html=True)
-                        st.write("Dosto, kuch toh gadbad ho gayi! Server pe kuch masla aa gaya hai. Thodi der mein try karna, ho jayega.")
+                        st.write("Aree kuch toh gadbad hua hai 100% Shelly ne hi button daba diya hoga Server ka mood off kar diya usne 💀 Thoda ruk jao… thik ho jayega lol.")
+                        
